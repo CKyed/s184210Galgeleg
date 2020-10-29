@@ -7,10 +7,10 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:id="@+id/textValue"
+        android:id="@+id/gameText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/forsog"
+        android:text="@string/gameTextView1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hangmanImage" />
@@ -18,40 +18,61 @@
     <ImageView
         android:id="@+id/hangmanImage"
         android:layout_width="240dp"
-        android:layout_height="229dp"
+        android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="hangmanPicture"
+        android:layout_marginBottom="57dp"
+        android:contentDescription="@string/hangmanpicture"
+        app:layout_constraintBottom_toTopOf="@+id/gameText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="332dp"
+        android:text="@string/playButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/letterValue" />
+
     <EditText
         android:id="@+id/letterValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
+        android:hint="@string/letterValue"
         android:inputType="textPersonName"
-        android:text="@string/letterValue"
         app:layout_constraintEnd_toStartOf="@+id/playButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textValue" />
+        app:layout_constraintTop_toBottomOf="@+id/gameText1" />
 
-    <Button
-        android:id="@+id/playButton"
+    <TextView
+        android:id="@+id/gameText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="388dp"
-        android:text="@string/playButton"
+        android:layout_marginBottom="420dp"
+        android:text="@string/gameTextView2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/letterValue"
-        app:layout_constraintTop_toBottomOf="@+id/hangmanImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hangmanImage" />
+
+    <TextView
+        android:id="@+id/gameText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="394dp"
+        android:text="@string/gameTextView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hangmanImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
