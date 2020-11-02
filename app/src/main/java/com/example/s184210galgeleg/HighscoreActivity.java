@@ -12,10 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
-
-import java.math.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -30,12 +26,17 @@ public class HighscoreActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Gson gson  = new Gson();
-        String json = preferences.getString("highScore","");
-        highScore = gson.fromJson(json,ArrayList.class);
 
+        String json = preferences.getString("highScore",null);
+        if(json!=null){
+            Collections.sort(highScore);
+            highScore = gson.fromJson(json,ArrayList.class);
+        }else{
+            for (int i = 0; i < 5; i++) {
+                highScore.add(i+1);
+            }
+        }
 
-
-        Collections.sort(highScore);
         ArrayAdapter adapter = new ArrayAdapter(this,R.layout.adapter_view_layout,R.id.highScoreScore,highScore){
             @Override
                     public View getView(int postion, View cachedView, ViewGroup parent){
@@ -53,28 +54,5 @@ public class HighscoreActivity extends AppCompatActivity {
         ListView listView = new ListView(this);
         listView.setAdapter(adapter);
         setContentView(listView);
-
-
-        //for (int i = 0; i <highScore.size() ; i++) {
-        //Har ikke kunne finde en løsning der gør at jeg får int værdien. Har prøvet .intValue()
-        //System.out.println("Indlæst: "+ highScore.get(i));
         }
-        /*
-        for (int i = 0; i < 5; i++) {
-            int score = preferences.getInt("score"+i,0);
-            if(score!=0){
-                highScore.add(score);
-            }
-        }
-        if(highScore.size()!=0){
-            //Her skal vi lave vores listview
-            for (int i = 0; i < 5; i++) {
-                System.out.println("");
-            }
-        }
-        */
-
-
-
-
 }
