@@ -11,10 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import logic.GameLogic;
+import logic.HangManFactory;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    GameLogic logic = new GameLogic();
+    HangManFactory hangManFactory = new HangManFactory();
+
+    //GameLogic spil = new GameLogic();
+    GameLogic logic = hangManFactory.getGameLogic("normal");
+    //GameLogic logic = new GameLogic();
     private TextView gameText1, gameText2, gameText3;
     private Button playButton;
     private EditText etLetter;

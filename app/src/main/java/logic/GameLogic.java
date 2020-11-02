@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class GameLogic {
+public class GameLogic implements IhangmanLogic {
+
+
+
   /** AHT afprøvning er muligeOrd synlig på pakkeniveau */
   ArrayList<String> muligeOrd = new ArrayList<String>();
   private String ordet;
