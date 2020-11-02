@@ -20,7 +20,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private EditText etLetter;
     private String sLetter;
     private ImageView hangmanImage;
-    private int attempts = 0;
+    private int failedAttempts = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             logic.gætBogstav(sLetter);
             etLetter.getText().clear();
             System.out.println(sLetter);
-            attempts =attempts+1;
             updateScreen();
 
         }
@@ -61,11 +60,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     public void updateScreen(){
         int wrongLetters = logic.getAntalForkerteBogstaver();
+        failedAttempts = logic.getAntalForkerteBogstaver();
         if (logic.erSpilletVundet()){
             Intent i = new Intent(this, GameFinish.class);
             i.putExtra("word", logic.getOrdet());
             i.putExtra("hasWon",true);
-            i.putExtra("attempts",attempts);
+            i.putExtra("attempts", failedAttempts);
             startActivity(i);
         }
 
@@ -94,7 +94,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(this, GameFinish.class);
                 i.putExtra("word", logic.getOrdet());
                 i.putExtra("hasWon",false);
-                i.putExtra("attempts",attempts);
+                i.putExtra("attempts", failedAttempts);
                 startActivity(i);
                 break;
         }

@@ -11,11 +11,12 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
-public class GameFinish extends AppCompatActivity {
+public class  GameFinish extends AppCompatActivity {
     private ImageView finishImage;
     private TextView finishText;
     private Button finishButton;
@@ -58,8 +59,29 @@ public class GameFinish extends AppCompatActivity {
 
     public void saveHighscore(){
         score = bundle.getInt("attempts");
-        ArrayList<Integer> highScore = new ArrayList<>();
-        System.out.println("Test1");
+        ArrayList<Integer> highScore;
+
+        //Jeg starer med at loade det der er i prefecne mangeren så jeg indlæser de gamle highscores.
+        Gson gsonLoad  = new Gson();
+        String jsonLoad = preferences.getString("highScore","");
+        //Konvertere fra Json til ArrayList
+        highScore = gsonLoad.fromJson(jsonLoad,ArrayList.class);
+        //Tilføjer den nye high score
+        highScore.add(score);
+        SharedPreferences.Editor prefsEditor = preferences.edit();
+        Gson gsonInput = new Gson();
+        //Laver ArrayListen om til et JSON object
+        String json = gsonInput.toJson(highScore);
+        prefsEditor.putString("highScore",json);
+        //Tilføjer objektet til Prefence manageren.
+        prefsEditor.apply();
+
+
+        for (int i = 0; i <highScore.size() ; i++) {
+            System.out.println("Indput: "+highScore.get(i));
+        }
+
+        /*
         for (int i = 0; i <5 ; i++) {
             System.out.println("Test2."+i);
             highScore.add(i);
@@ -79,6 +101,6 @@ public class GameFinish extends AppCompatActivity {
                 System.out.println("Tester mit array");
                 System.out.println(""+highScore.get(i));
             }
-        }
+        }*/
     }
 }
