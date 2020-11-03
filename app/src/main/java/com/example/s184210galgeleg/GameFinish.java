@@ -37,12 +37,13 @@ public class  GameFinish extends AppCompatActivity {
         bundle = getIntent().getExtras();
         hasWon = bundle.getBoolean("hasWon");
         word = bundle.getString("word");
+        score = bundle.getInt("attempts");
         System.out.println(hasWon);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
         if(hasWon){
-            finishText.setText("Tillykke. Du har vundet! :D");
+            finishText.setText("Tillykke. Du har vundet med " + score + " forkert forsøg");
             //TODO  Vælge det rigtige billede
             finishImage.setImageResource(R.drawable.galge);
             saveHighscore();
@@ -58,14 +59,16 @@ public class  GameFinish extends AppCompatActivity {
     }
 
     public void saveHighscore(){
-        score = bundle.getInt("attempts");
-        ArrayList<Integer> highScore;
+        ArrayList<Integer> highScore = new ArrayList<>();
 
         //Jeg starer med at loade det der er i prefecne mangeren så jeg indlæser de gamle highscores.
         Gson gsonLoad  = new Gson();
-        String jsonLoad = preferences.getString("highScore","");
+        String jsonLoad = preferences.getString("highScore",null);
         //Konvertere fra Json til ArrayList
-        highScore = gsonLoad.fromJson(jsonLoad,ArrayList.class);
+        //
+        if(jsonLoad!=null){
+            highScore = gsonLoad.fromJson(jsonLoad,ArrayList.class);    
+        }
         //Tilføjer den nye high score
         highScore.add(score);
         SharedPreferences.Editor prefsEditor = preferences.edit();
@@ -80,27 +83,5 @@ public class  GameFinish extends AppCompatActivity {
         for (int i = 0; i <highScore.size() ; i++) {
             System.out.println("Indput: "+highScore.get(i));
         }
-
-        /*
-        for (int i = 0; i <5 ; i++) {
-            System.out.println("Test2."+i);
-            highScore.add(i);
-            //Alle de tidligere antal forsøg bliver loadet ind i min ArrayList. ArrayListen har en længde på 5 uansethvad
-            highScore.set(i,preferences.getInt("score"+i,0));
-        }
-        //Min score bliver tilføjet ArrayListen. Længden er nu 6
-        highScore.add(score);
-        //ArrayListen bliver nu sorteret, laveste værdi er først.
-        Collections.sort(highScore);
-        System.out.println("test3");
-        //De 5 laveste værdier bliver gemt i prefences, med mindre at den laveste værdi er 0. Hvis scoren ikke er blandt top 5 bliver den ikke gemt.
-        for (int i = 0; i < highScore.size(); i++) {
-            System.out.println("test4."+i);
-            if (!(highScore.get(i)==0)){
-            preferences.edit().putInt("score"+i,highScore.get(i));
-                System.out.println("Tester mit array");
-                System.out.println(""+highScore.get(i));
-            }
-        }*/
     }
 }

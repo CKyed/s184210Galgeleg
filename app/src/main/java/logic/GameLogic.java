@@ -22,6 +22,7 @@ public class GameLogic implements IhangmanLogic {
   private boolean sidsteBogstavVarKorrekt;
   private boolean spilletErVundet;
   private boolean spilletErTabt;
+  private ArrayList<Player> players;
 
   public GameLogic() {
     muligeOrd.add("bil");
@@ -35,7 +36,6 @@ public class GameLogic implements IhangmanLogic {
     muligeOrd.add("tyve");
     startNytSpil();
   }
-
 
   public ArrayList<String> getBrugteBogstaver() {
     return brugteBogstaver;
@@ -68,7 +68,6 @@ public class GameLogic implements IhangmanLogic {
   public boolean erSpilletSlut() {
     return spilletErTabt || spilletErVundet;
   }
-
 
   public void startNytSpil() {
     brugteBogstaver.clear();
@@ -208,4 +207,13 @@ public class GameLogic implements IhangmanLogic {
   public static void main(String[] args) throws Exception {
     new GameLogic().hentOrdFraRegneark("2");
   }
+
+  public void createPlayer(String nickName, int age, String skillLevel){
+    Player player = new Player.PlayerBuilder(nickName,age,skillLevel)
+            .highScore(4)
+            .highScoreWord("Fiskekutter")
+            .numberOfGames(15)
+            .build();
+  }
+
 }

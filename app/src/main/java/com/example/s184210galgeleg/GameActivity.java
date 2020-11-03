@@ -40,6 +40,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameText3 = findViewById(R.id.gameText3);
         hangmanImage.setImageResource(R.drawable.galge);
         playButton.setOnClickListener(this);
+        gameText1.setText("Dit ord " + logic.getSynligtOrd());
 
 
         logic.logStatus();
@@ -74,7 +75,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
 
-        gameText1.setText("Dit ord" + logic.getSynligtOrd());
+        gameText1.setText("Dit ord " + logic.getSynligtOrd());
         gameText2.setText("Du har gættet " + wrongLetters +" antal gange forkert.");
         gameText3.setText("Bogstaver du har gættet på: "+logic.getBrugteBogstaver());
         switch (wrongLetters){
